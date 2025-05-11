@@ -18,47 +18,52 @@ Module 2 capstone project
 ## 1. Deployment Environment Setup
 
 ### ✅ Objective:
+Clone this repo locally.
+Execute this command from a cli:
+   ```bash
+   git clone <repo git URL>
+   ```
+Configure your environment setting the env AWS variable:
+export AWS_ACCESS_KEY_ID=<value>
+export AWS_SECRET_ACCESS_KEY=<value>
+export AWS_SESSION_TOKEN=<value>
+export AWS_REGION=<value>
+
 
 Create a deployment environment with all required tools:
-
-* Docker
-* kubectl
-* eksctl
-* AWS CLI
-* Git
-
-### 🛠️ Steps:
-
-1. Provisioned an Ubuntu EC2 instance (or used local VM).
-2. Installed Docker:
-
+To deploy the deployment server will we use packer and terraform.
+First thing first, edit the hcl packer file and modify 
+region 
+instance_type 
+ami_name 
+accordingly to your use case then create the custom AMI using the script provided in packer directory, by executing command:
    ```bash
-   sudo apt update && sudo apt install -y docker.io
-   sudo systemctl start docker && sudo systemctl enable docker
+   packer build dsrveks.pkr.hcl
    ```
-3. Installed `kubectl`:
+Notedown the ami ID at the end of the output or look inside AWS console in the AMI Catalog, side tab My AMI
+The AMI image will contain all the tools needed:
+kubectl
+eksctl
+docker
+npm
+helm
+terraform
 
-   ```bash
-   curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-   chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-   ```
-4. Installed `eksctl`:
-
-   ```bash
-   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-   sudo mv /tmp/eksctl /usr/local/bin
-   ```
-5. Verified setup:
-
-   ```bash
-   docker --version
-   kubectl version --client
-   eksctl version
-   ```
+Create the deployment server using terraform script in directory terraform/deplsrveks.
+Before executing the provisioning command, remember to change the AMI ID variabble value in file terraform/deplsrveks/terraform.tfvars with the AMI ID obtained earlier.
+When done, execute in sequence the commands:
+```bash
+terraform init
+terraform fmt
+terraform validate
+terraform apply
+```
+the EC2 instance will be created. Use the connect tab on AWS Console to connect to the instance
 
 ### ✅ Verification:
 
 * All tools ran without errors.
+  To verify that everything 
 * Tested a sample Docker container and connected to AWS CLI successfully.
 
 ---
@@ -97,7 +102,7 @@ Create a deployment environment with all required tools:
 
 ### ✅ Verification:
 
-* Image is visible in DockerHub.
+* Image is visible in ECR.
 * Pulled and ran image successfully.
 * Created `v2` with a small update and pushed that version as well.
 
