@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: <initials-cluster>
+  name: aws-aer-rt-01
   region: us-east-1
   version: "1.32"
 
