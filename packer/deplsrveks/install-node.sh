@@ -1,4 +1,10 @@
 #!/bin/bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-source ~/.bashrc
-nvm install --lts
+echo '**********************'
+echo 'Installing node'
+echo '**********************'
+sudo apt-get update
+sudo apt-get -y install nodejs
+sudo apt-get -y install npm
+echo '**********************'
+echo 'End Installing node'
+echo '**********************'

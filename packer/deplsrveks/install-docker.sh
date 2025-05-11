@@ -1,4 +1,8 @@
 #!/bin/bash
+echo '**********************'
+echo 'Installing docker'
+echo '**********************'
+
 echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 # Add Docker's official GPG key:
 sudo apt-get update -y
@@ -15,3 +19,6 @@ echo \
 sudo apt-get -y update
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+echo '**********************'
+echo 'End Installing docker'
+echo '**********************'
