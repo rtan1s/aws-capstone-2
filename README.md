@@ -17,7 +17,7 @@ Module 2 capstone project
 
 ## 1. Deployment Environment Setup
 
-### ✅ Objective:
+### Objective:
 Clone this repo locally.
 Execute this command from a cli:
    ```bash
@@ -33,9 +33,9 @@ export AWS_REGION=<value>
 Create a deployment environment with all required tools:
 To deploy the deployment server will we use packer and terraform.
 First thing first, edit the hcl packer file and modify 
-region 
-instance_type 
-ami_name 
+* region 
+* instance_type 
+* ami_name 
 accordingly to your use case then create the custom AMI using the script provided in packer directory, by executing command:
    ```bash
    packer build dsrveks.pkr.hcl
@@ -60,7 +60,7 @@ terraform apply
 ```
 the EC2 instance will be created. Use the connect tab on AWS Console to connect to the instance
 
-### ✅ Verification:
+### Verification:
 
 * All tools ran without errors.
   To verify that everything 
